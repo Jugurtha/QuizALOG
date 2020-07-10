@@ -17,12 +17,10 @@ public class Answer implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private String text;
+	@Column(name="ID_QUESTION")
+	private int idQuestion;
 
-	//bi-directional many-to-one association to Question
-	@ManyToOne
-	@JoinColumn(name="ID_QUESTION")
-	private Question question;
+	private String text;
 
 	public Answer() {
 	}
@@ -35,6 +33,14 @@ public class Answer implements Serializable {
 		this.id = id;
 	}
 
+	public int getIdQuestion() {
+		return this.idQuestion;
+	}
+
+	public void setIdQuestion(int idQuestion) {
+		this.idQuestion = idQuestion;
+	}
+
 	public String getText() {
 		return this.text;
 	}
@@ -43,18 +49,9 @@ public class Answer implements Serializable {
 		this.text = text;
 	}
 
-	public Question getQuestion() {
-		return this.question;
-	}
-
-	public void setQuestion(Question question) {
-		this.question = question;
-	}
-	
 	@Override
 	public String toString() {
-		return "Answer [id=" + id + ", text=" + text /*+ ", question=" + question*/ + "]";
+		return "Answer [id=" + id + ", idQuestion=" + idQuestion + ", text=" + text + "]";
 	}
-
 
 }

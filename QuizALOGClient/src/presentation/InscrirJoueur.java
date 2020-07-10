@@ -11,8 +11,6 @@ import java.io.File;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NameClassPair;
-import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -122,17 +120,14 @@ public class InscrirJoueur extends JFrame {
 		 Context ctx;
 		 try {
 			 ctx = new InitialContext();
-			 NamingEnumeration<NameClassPair> list = ctx.list("");
-			 while(list.hasMore())
-				 System.out.println(list.next().getName());
-
 			 QuizALOGBackendRemote quizBackend = (QuizALOGBackendRemote)ctx.lookup("session.QuizALOGBackendRemote#session.QuizALOGBackendRemote");
 			 
-			 if(quizBackend.playerExist(player.getPseudo(), player.getEmail())==0)
+			 if(quizBackend.playerExist(player.getPseudo(), player.getEmail())==0) {
 				 quizBackend.addPlayer(player);
+				 System.out.println("Player "+player.getPseudo()+" Added.");
+			 }
 
-if(!(quizBackend.playerExist(player.getPseudo(), player.getEmail())==0))
-	System.out.println("Player "+player.getPseudo()+" Added.");
+	
 
 			player.setId(quizBackend.playerExist(player.getPseudo(), player.getEmail()));
 	

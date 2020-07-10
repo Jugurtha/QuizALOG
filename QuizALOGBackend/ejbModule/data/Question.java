@@ -1,8 +1,9 @@
 package data;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.*;
 
 
 /**
@@ -24,10 +25,10 @@ public class Question implements Serializable {
 	private int score;
 
 	private String text;
-
-	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="question")
+	
+	@javax.persistence.Transient
 	private List<Answer> answers;
+
 
 	public Question() {
 	}
@@ -64,24 +65,20 @@ public class Question implements Serializable {
 		this.text = text;
 	}
 
+	@javax.persistence.Transient
 	public List<Answer> getAnswers() {
-		return this.answers;
+		return answers;
 	}
-
+	
+	@javax.persistence.Transient
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
 	}
-
+	
+	@javax.persistence.Transient
 	public Answer addAnswer(Answer answer) {
 		getAnswers().add(answer);
-		answer.setQuestion(this);
-
-		return answer;
-	}
-
-	public Answer removeAnswer(Answer answer) {
-		getAnswers().remove(answer);
-		answer.setQuestion(null);
+		answer.setIdQuestion(id);
 
 		return answer;
 	}

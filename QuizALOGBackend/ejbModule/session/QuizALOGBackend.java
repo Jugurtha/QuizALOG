@@ -5,6 +5,9 @@ import java.util.Collections;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -19,6 +22,7 @@ import data.Question;
  */
 @Stateless
 @LocalBean
+@WebService
 public class QuizALOGBackend implements QuizALOGBackendRemote {
 
     /**
@@ -30,6 +34,7 @@ public class QuizALOGBackend implements QuizALOGBackendRemote {
     @PersistenceContext(unitName = "QuizALOGBackend")
     private EntityManager entityManager;
 
+    @WebMethod(exclude = true)
 	@Override
 	public int playerExist(String pseudo, String email) {
 		
@@ -44,12 +49,14 @@ public class QuizALOGBackend implements QuizALOGBackendRemote {
 			return 0;
 		return l.get(0).getId();
 	}
-
+    
+    @WebMethod(exclude = true)
 	@Override
 	public void addPlayer(Player p) {
 		entityManager.persist(p);
 	}
-
+    
+    @WebMethod(exclude = true)
 	@Override
 	public void saveGame(Game g, ArrayList<GameQuestion> gameQuestions) {
 		entityManager.persist(g);
@@ -57,24 +64,27 @@ public class QuizALOGBackend implements QuizALOGBackendRemote {
 			entityManager.persist(gq);
 	}
 
+    @WebMethod
 	@Override
-	public ArrayList<Question> loadQustions(int nbr) {
+	public ArrayList<Question> loadQustions(@WebParam(name = "nbr")int nbr) {
 		
 		ArrayList<Question> questions = new ArrayList<Question>();
-		for(Object o : entityManager.createQuery("SELECT q FROM Question q").getResultList())
+		for(Object o : entityManager.createNamedQuery("Question.findAll").getResultList())
 		{
 			Question q = (Question) o;
+			
 			ArrayList<Answer> answers =  new ArrayList<Answer>();
-			for(Object a : entityManager.createQuery("SELECT a FROM Answer a WHERE a.question = :question")
-					.setParameter("question", q)
+			for(Object a : entityManager.createQuery("SELECT a FROM Answer a WHERE a.idQuestion = :param")
+					.setParameter("param", q.getId())
 					.getResultList())
 			{
+				
 				Answer an = (Answer)a;
-				an.setQuestion(q);
 				answers.add(an);
 			}
 			
 			q.setAnswers(answers);
+			
 			questions.add(q);
 		}
 
@@ -82,16 +92,23 @@ public class QuizALOGBackend implements QuizALOGBackendRemote {
 		return new ArrayList<Question>(questions.subList(0, nbr));
 	}
 
+    @WebMethod
 	@Override
-	public ArrayList<Answer> loadQustionAnswers(int id) {
+	public ArrayList<Answer> loadQustionAnswers(@WebParam(name = "id")int id) {
 		ArrayList<Answer> answers = new ArrayList<Answer>();
 		Question q = new Question();
 		q.setId(id);
-		for(Object a : entityManager.createQuery("SELECT a FROM Answer a WHERE a.question = :param")
-				.setParameter("param", q)
+		for(Object a : entityManager.createQuery("SELECT a FROM Answer a WHERE a.idQuestion = :param")
+				.setParameter("param", q.getId())
 				.getResultList())
 			answers.add((Answer)a);
 		return answers;
+	}
+	
+    @WebMethod
+	public String testWebService(String text)
+	{
+		return text;
 	}
 
 }

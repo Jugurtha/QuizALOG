@@ -30,7 +30,7 @@ public class QuizALOGClient {
 			
 			System.out.println(quizBackend.playerExist(p.getPseudo(), p.getEmail()));
 			
-			//System.out.println(quizBackend.loadQustionAnswers(2));
+			System.out.println(quizBackend.loadQustionAnswers(2));
 
 			
 			System.out.println(quizBackend.loadQustions(4));

@@ -51,9 +51,4 @@ public class Game implements Serializable {
 		this.player = player;
 	}
 
-	@Override
-	public String toString() {
-		return "Game [id=" + id + ", score=" + score + ", player=" + player + "]";
-	}
-
 }
