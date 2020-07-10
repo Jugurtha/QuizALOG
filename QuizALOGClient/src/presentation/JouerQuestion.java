@@ -28,6 +28,7 @@ import session.QuizALOGBackendRemote;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Vector;
@@ -247,12 +248,44 @@ public class JouerQuestion extends JFrame {
 	}
 	
 	private void loadQuestions() {
+		//*
+		wsclient.QuizALOGBackendProxy quizWs = new wsclient.QuizALOGBackendProxy();
+		try {
+			questions = new ArrayList<Question>(4);
+			for(wsclient.Question q : quizWs.loadQustions(4)) {
+System.out.println(q);
+				Question question = new Question();
+				question.setId(q.getId());
+				question.setIdCorrectAnswer(q.getIdCorrectAnswer());
+				question.setScore(q.getScore());
+				question.setText(q.getText());
+				
+				ArrayList<Answer> answers = new ArrayList<Answer>();
+				for(wsclient.Answer wsa : q.getAnswers()) {
+					Answer answer = new Answer();
+					answer.setId(wsa.getId());
+					answer.setIdQuestion(wsa.getIdQuestion());
+					answer.setText(wsa.getText());
+					answers.add(answer);
+				}
+				question.setAnswers(answers);
+System.out.println(question);
+				questions.add(question);
+			}
+				
+
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		//*/
+		/*
 		Context ctx;
 		try {
 			ctx = new InitialContext();
 			QuizALOGBackendRemote quizBackend = (QuizALOGBackendRemote)ctx.lookup("session.QuizALOGBackendRemote#session.QuizALOGBackendRemote");
 			questions = quizBackend.loadQustions(4);
 		} catch (NamingException e) {e.printStackTrace();}
+		//*/
 	}
 	
 	private Question nextQuestion()
