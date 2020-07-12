@@ -44,10 +44,10 @@ public class QuizALOGBackendProxy implements wsclient.QuizALOGBackend {
     return quizALOGBackend;
   }
   
-  public wsclient.Answer[] loadQustionAnswers(int id) throws java.rmi.RemoteException{
+  public void addPlayer(wsclient.Player arg0) throws java.rmi.RemoteException{
     if (quizALOGBackend == null)
       _initQuizALOGBackendProxy();
-    return quizALOGBackend.loadQustionAnswers(id);
+    quizALOGBackend.addPlayer(arg0);
   }
   
   public wsclient.Question[] loadQustions(int nbr) throws java.rmi.RemoteException{
@@ -56,10 +56,28 @@ public class QuizALOGBackendProxy implements wsclient.QuizALOGBackend {
     return quizALOGBackend.loadQustions(nbr);
   }
   
+  public int playerExist(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException{
+    if (quizALOGBackend == null)
+      _initQuizALOGBackendProxy();
+    return quizALOGBackend.playerExist(arg0, arg1);
+  }
+  
   public java.lang.String testWebService(java.lang.String arg0) throws java.rmi.RemoteException{
     if (quizALOGBackend == null)
       _initQuizALOGBackendProxy();
     return quizALOGBackend.testWebService(arg0);
+  }
+  
+  public void saveGame(wsclient.Game arg0, wsclient.GameQuestion[] arg1) throws java.rmi.RemoteException{
+    if (quizALOGBackend == null)
+      _initQuizALOGBackendProxy();
+    quizALOGBackend.saveGame(arg0, arg1);
+  }
+  
+  public wsclient.Answer[] loadQustionAnswers(int id) throws java.rmi.RemoteException{
+    if (quizALOGBackend == null)
+      _initQuizALOGBackendProxy();
+    return quizALOGBackend.loadQustionAnswers(id);
   }
   
   

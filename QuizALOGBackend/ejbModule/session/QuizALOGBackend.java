@@ -34,7 +34,7 @@ public class QuizALOGBackend implements QuizALOGBackendRemote {
     @PersistenceContext(unitName = "QuizALOGBackend")
     private EntityManager entityManager;
 
-    @WebMethod(exclude = true)
+    @WebMethod
 	@Override
 	public int playerExist(String pseudo, String email) {
 		
@@ -50,18 +50,22 @@ public class QuizALOGBackend implements QuizALOGBackendRemote {
 		return l.get(0).getId();
 	}
     
-    @WebMethod(exclude = true)
+    @WebMethod
 	@Override
 	public void addPlayer(Player p) {
 		entityManager.persist(p);
 	}
     
-    @WebMethod(exclude = true)
+    @WebMethod
 	@Override
 	public void saveGame(Game g, ArrayList<GameQuestion> gameQuestions) {
 		entityManager.persist(g);
 		for(GameQuestion gq : gameQuestions)
+		{
+			gq.setGame(g);
 			entityManager.persist(gq);
+		}
+			
 	}
 
     @WebMethod
