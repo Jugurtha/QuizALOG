@@ -8,10 +8,11 @@
 package wsclient;
 
 public interface QuizALOGBackend extends java.rmi.Remote {
+    public void saveGame(wsclient.Game arg0, wsclient.GameQuestion[] arg1) throws java.rmi.RemoteException;
     public void addPlayer(wsclient.Player arg0) throws java.rmi.RemoteException;
     public wsclient.Question[] loadQustions(int nbr) throws java.rmi.RemoteException;
     public int playerExist(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException;
+    public java.lang.Object[][] getScores() throws java.rmi.RemoteException;
     public java.lang.String testWebService(java.lang.String arg0) throws java.rmi.RemoteException;
-    public void saveGame(wsclient.Game arg0, wsclient.GameQuestion[] arg1) throws java.rmi.RemoteException;
     public wsclient.Answer[] loadQustionAnswers(int id) throws java.rmi.RemoteException;
 }

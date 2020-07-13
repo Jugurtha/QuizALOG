@@ -1,5 +1,5 @@
 /**
- * Answer.java
+ * LoadQustionAnswers.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
@@ -7,28 +7,20 @@
 
 package wsclient;
 
-public class Answer  implements java.io.Serializable {
+public class LoadQustionAnswers  implements java.io.Serializable {
     private int id;
 
-    private int idQuestion;
-
-    private java.lang.String text;
-
-    public Answer() {
+    public LoadQustionAnswers() {
     }
 
-    public Answer(
-           int id,
-           int idQuestion,
-           java.lang.String text) {
+    public LoadQustionAnswers(
+           int id) {
            this.id = id;
-           this.idQuestion = idQuestion;
-           this.text = text;
     }
 
 
     /**
-     * Gets the id value for this Answer.
+     * Gets the id value for this LoadQustionAnswers.
      * 
      * @return id
      */
@@ -38,7 +30,7 @@ public class Answer  implements java.io.Serializable {
 
 
     /**
-     * Sets the id value for this Answer.
+     * Sets the id value for this LoadQustionAnswers.
      * 
      * @param id
      */
@@ -46,50 +38,10 @@ public class Answer  implements java.io.Serializable {
         this.id = id;
     }
 
-
-    /**
-     * Gets the idQuestion value for this Answer.
-     * 
-     * @return idQuestion
-     */
-    public int getIdQuestion() {
-        return idQuestion;
-    }
-
-
-    /**
-     * Sets the idQuestion value for this Answer.
-     * 
-     * @param idQuestion
-     */
-    public void setIdQuestion(int idQuestion) {
-        this.idQuestion = idQuestion;
-    }
-
-
-    /**
-     * Gets the text value for this Answer.
-     * 
-     * @return text
-     */
-    public java.lang.String getText() {
-        return text;
-    }
-
-
-    /**
-     * Sets the text value for this Answer.
-     * 
-     * @param text
-     */
-    public void setText(java.lang.String text) {
-        this.text = text;
-    }
-
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof Answer)) return false;
-        Answer other = (Answer) obj;
+        if (!(obj instanceof LoadQustionAnswers)) return false;
+        LoadQustionAnswers other = (LoadQustionAnswers) obj;
         if (obj == null) return false;
         if (this == obj) return true;
         if (__equalsCalc != null) {
@@ -98,11 +50,7 @@ public class Answer  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            this.id == other.getId() &&
-            this.idQuestion == other.getIdQuestion() &&
-            ((this.text==null && other.getText()==null) || 
-             (this.text!=null &&
-              this.text.equals(other.getText())));
+            this.id == other.getId();
         __equalsCalc = null;
         return _equals;
     }
@@ -115,37 +63,20 @@ public class Answer  implements java.io.Serializable {
         __hashCodeCalc = true;
         int _hashCode = 1;
         _hashCode += getId();
-        _hashCode += getIdQuestion();
-        if (getText() != null) {
-            _hashCode += getText().hashCode();
-        }
         __hashCodeCalc = false;
         return _hashCode;
     }
 
     // Type metadata
     private static org.apache.axis.description.TypeDesc typeDesc =
-        new org.apache.axis.description.TypeDesc(Answer.class, true);
+        new org.apache.axis.description.TypeDesc(LoadQustionAnswers.class, true);
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://session/", "answer"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://session/", "loadQustionAnswers"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "id"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("idQuestion");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "idQuestion"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("text");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "text"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

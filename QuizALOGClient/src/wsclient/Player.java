@@ -7,8 +7,6 @@
 
 package wsclient;
 
-import java.util.Arrays;
-
 public class Player  implements java.io.Serializable {
     private java.lang.String email;
 
@@ -278,11 +276,5 @@ public class Player  implements java.io.Serializable {
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
     }
-
-	@Override
-	public String toString() {
-		return "Player [email=" + email + ", games=" + Arrays.toString(games) + ", id=" + id + ", name=" + name
-				+ ", pseudo=" + pseudo + "]";
-	}
 
 }

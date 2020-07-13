@@ -20,8 +20,8 @@ public class GameQuestion  implements java.io.Serializable {
     }
 
     public GameQuestion(
-    		wsclient.Answer answer,
-    		wsclient.Game game,
+           wsclient.Answer answer,
+           wsclient.Game game,
            int id,
            int idQuestion) {
            this.answer = answer;
@@ -217,10 +217,5 @@ public class GameQuestion  implements java.io.Serializable {
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
     }
-
-	@Override
-	public String toString() {
-		return "GameQuestion [answer=" + answer + ", game=" + game + ", id=" + id + ", idQuestion=" + idQuestion + "]";
-	}
 
 }

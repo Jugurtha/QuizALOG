@@ -181,9 +181,4 @@ public class Game  implements java.io.Serializable {
             _javaType, _xmlType, typeDesc);
     }
 
-	@Override
-	public String toString() {
-		return "Game [id=" + id + ", player=" + player + ", score=" + score + "]";
-	}
-
 }

@@ -7,8 +7,6 @@
 
 package wsclient;
 
-import java.util.Arrays;
-
 public class Question  implements java.io.Serializable {
     private wsclient.Answer[] answers;
 
@@ -24,7 +22,7 @@ public class Question  implements java.io.Serializable {
     }
 
     public Question(
-    		wsclient.Answer[] answers,
+           wsclient.Answer[] answers,
            int id,
            int idCorrectAnswer,
            int score,
@@ -268,11 +266,5 @@ public class Question  implements java.io.Serializable {
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
     }
-
-	@Override
-	public String toString() {
-		return "Question [answers=" + Arrays.toString(answers) + ", id=" + id + ", idCorrectAnswer=" + idCorrectAnswer
-				+ ", score=" + score + ", text=" + text + "]";
-	}
 
 }

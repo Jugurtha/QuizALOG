@@ -116,7 +116,7 @@ public class QuizALOGBackend implements QuizALOGBackendRemote {
 		return text;
 	}
 
-    @WebMethod(exclude = true)
+    @WebMethod//(exclude = true)
 	@Override
 	public Object[][] getScores() {
 		Object[][] result = new Object[10][3];
