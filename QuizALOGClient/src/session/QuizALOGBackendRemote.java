@@ -17,4 +17,5 @@ public interface QuizALOGBackendRemote {
 	void saveGame(Game g, ArrayList<GameQuestion> gameQuestions);
 	ArrayList<Question> loadQustions(int nbr);
 	ArrayList<Answer> loadQustionAnswers(int id);
+	Object[][] getScores();
 }

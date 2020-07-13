@@ -9,6 +9,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -18,6 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import presentation.ejb.ScoresTable;
+import session.QuizALOGBackendRemote;
 
 @SuppressWarnings("serial")
 public class QuizJeux extends JFrame {
@@ -76,8 +82,23 @@ public class QuizJeux extends JFrame {
 		);
 		panel.setLayout(null);
 		JButton btnLancement = new JButton("COMMENCER");
-		btnLancement.setBounds((450-160)/2, 120, 160, 23);
+		btnLancement.setBounds((450-160)/2, 110, 160, 23);
 		panel.add(btnLancement);
+		
+		JButton bestScoresBtn = new JButton("Meilleurs Scores");
+		bestScoresBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Context ctx;
+				try {
+					 ctx = new InitialContext();
+					 QuizALOGBackendRemote quizBackend = (QuizALOGBackendRemote)ctx.lookup("session.QuizALOGBackendRemote#session.QuizALOGBackendRemote");
+					 ScoresTable st = new ScoresTable(quizBackend.getScores());
+					 st.setVisible(true);
+				} catch (NamingException e1) {e1.printStackTrace();}
+			}
+		});
+		bestScoresBtn.setBounds((450-160)/2, 140, 160, 23);
+		panel.add(bestScoresBtn);
 		
 		JButton btnArrter = new JButton("Arr\u00EAter");
 		btnArrter.addActionListener(new ActionListener() {
@@ -85,7 +106,7 @@ public class QuizJeux extends JFrame {
 				manipAppFen.windowClosing(null);
 			}
 		});
-		btnArrter.setBounds((450-160)/2, 150, 160, 23);
+		btnArrter.setBounds((450-160)/2, 170, 160, 23);
 		panel.add(btnArrter);
 		
 		//*

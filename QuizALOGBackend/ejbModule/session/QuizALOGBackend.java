@@ -2,6 +2,7 @@ package session;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -113,6 +114,22 @@ public class QuizALOGBackend implements QuizALOGBackendRemote {
 	public String testWebService(String text)
 	{
 		return text;
+	}
+
+    @WebMethod(exclude = true)
+	@Override
+	public Object[][] getScores() {
+		Object[][] result = new Object[10][3];
+		List<?> list = entityManager.createQuery("select g from Game g join g.player p order by g.score desc")
+		.setMaxResults(10)
+		.getResultList();
+		for(int i = 0;i<list.size();i++)
+		{
+			result[i][0] = new String(((Game) list.get(i)).getPlayer().getPseudo());
+			result[i][1] = new String(((Game) list.get(i)).getPlayer().getEmail());
+			result[i][2] = new Integer(((Game) list.get(i)).getScore());
+		}
+		return result;
 	}
 
 }
